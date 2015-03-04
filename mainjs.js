@@ -1,11 +1,11 @@
 // mainjs.js
 
-var dataset;
 
 $(document).ready(function() {
 	// initialize
 	$("#dataset").linedtextarea();
 	
+	// statistical calculations
 	$("#calcMean").click(function() {
 		output(jStat.mean(getInput()));
 	});
@@ -41,16 +41,22 @@ $(document).ready(function() {
 	$("#calcKurtosis").click(function() {
 		output(jStat.kurtosis(getInput()));
 	});
+	
+	// new functions to be added on UI
+	$("#quartiles").click(function() {
+		output(jStat.quartiles(getInput()));
+	});
+	
 });	// end of document.ready
 
 function output(out) {
 	document.getElementById("answer").innerHTML = out;
 }
 
-// implement error checking here
+// implement error checking here, pls add comments about "what kind of error check"
 function getInput() {
 	var arr = new Array();
-	var strArr = document.getElementById("dataset").value.split('\n');	// di ko alam ano yung whitespace na regex
+	var strArr = document.getElementById("dataset").value.split('\n');	// replace with whitespace regex
 	for(var i = 0; i < strArr.length; i++)
 		arr[i] = parseInt(strArr[i]);
 	return arr;
