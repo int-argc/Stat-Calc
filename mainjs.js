@@ -55,10 +55,28 @@ function output(out) {
 
 // implement error checking here, pls add comments about "what kind of error check"
 function getInput() {
-	var arr = new Array();
-	var strArr = document.getElementById("dataset").value.split('\n');	// replace with whitespace regex
-	for(var i = 0; i < strArr.length; i++)
-		arr[i] = parseInt(strArr[i]);
-	return arr;
+	if(validDataSet()) {
+		var arr = new Array();
+		var strArr = document.getElementById("dataset").value.split('\n');	// replace with whitespace regex
+		for(var i = 0; i < strArr.length; i++) {
+			if(strArr[i] == '') errorOccured();
+			arr[i] = parseInt(strArr[i]);
+		}
+		return arr;
+	}
+	errorOccured();
+}
+
+function errorOccured() {
+	alert("ERROR IN DATA SET");
+	// exit status
+}
+
+function validDataSet() {
+	var content = document.getElementById("dataset").value;
+	for(var i = 0; i < content.length; i++)
+		if((content[i] > '9' || content[i] < '0') && content[i] != '\n')
+			return false;
+	return true;
 }
 
