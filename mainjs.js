@@ -80,3 +80,13 @@ function validDataSet() {
 	return true;
 }
 
+function getPercentile(k) {
+	var arr = getInput();
+	arr.sort(function(a, b) {return a - b;});
+	
+	var n = arr.length;
+	var index = Math.round(k / 100 * n);
+	
+	return arr[index - 1];
+}
+
