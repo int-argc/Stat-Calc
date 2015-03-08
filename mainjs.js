@@ -47,6 +47,10 @@ $(document).ready(function() {
 		output(jStat.quartiles(getInput()));
 	});
 	
+	$("#generateBarGraph").click(function() {
+		generateBarGraph();
+	});
+	
 });	// end of document.ready
 
 function output(out) {
@@ -88,5 +92,23 @@ function getPercentile(k) {
 	var index = Math.round(k / 100 * n);
 	
 	return arr[index - 1];
+}
+
+function generateBarGraph() {
+	var arr = getInput();
+	var x = d3.scale.linear()
+    .domain([0, d3.max(arr)])
+    .range([0, 420]);
+	
+	d3.select(".bargraph")
+	.selectAll("div")
+	.data(arr)
+	.enter().append("div")
+	.style("width", function(d){
+		return x(d) + "px";
+	})
+	.text(function(d) {
+		return d;
+	});
 }
 

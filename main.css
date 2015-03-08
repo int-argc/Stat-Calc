@@ -21,3 +21,16 @@ body{
     margin-top: 50px;
     font-size: 30px;
 	}
+
+/* chart css: don't modify -int-argc */
+
+
+.bargraph div {
+	font: 10px sans-serif;
+	background-color: green;
+	color: white;
+	text-align: right;
+	padding: 8px;
+	margin: 2px;
+}
+
