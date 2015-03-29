@@ -42,13 +42,39 @@ $(document).ready(function() {
 		output(jStat.kurtosis(getInput()));
 	});
 	
-	// new functions to be added on UI
 	$("#quartiles").click(function() {
 		output(jStat.quartiles(getInput()));
 	});
 	
 	$("#generateBarGraph").click(function() {
 		generateBarGraph();
+	});
+	
+	$("#generateFreqTable").click(function() {
+		var arr = getInput();
+		var freq = Array.apply(null, new Array(arr.length)).map(Number.prototype.valueOf, 0);
+		
+		for(var i = 0; i < arr.length; i++)
+			freq[arr.indexOf(arr[i])]++;
+		
+		$("#chart").append("<table border='1' id='freqtab'></table>");
+		$("#freqtab").append("<tr><th>Data</th><th>Frequency</th></tr>");
+		
+		for(var i = 0; i < freq.length; i++) {
+			if(freq[i] != 0)
+				$("#freqtab").append("<tr><td>" + arr[i] + "</td><td>" + freq[i] + "</td></tr>");
+		}
+		
+	});
+	
+	$("#generateRandData").click(function() {
+		var numData = Math.floor((Math.random() * 100) + 1);
+		var data = "";
+		for(var i = 0; i < numData - 1; i++)
+			data += Math.floor((Math.random() * 1000) + 1) + "\n";
+		data += Math.floor((Math.random() * 1000) + 1);
+		
+		$("#dataset").text(data);
 	});
 	
 });	// end of document.ready
