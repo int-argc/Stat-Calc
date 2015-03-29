@@ -5,6 +5,10 @@ $(document).ready(function() {
 	// initialize
 	$("#dataset").linedtextarea();
 	
+	$("#Reset").click(function() {
+		$("#dataset").text("");
+	});
+	
 	// statistical calculations
 	$("#calcMean").click(function() {
 		output(jStat.mean(getInput()));
@@ -47,6 +51,8 @@ $(document).ready(function() {
 	});
 	
 	$("#generateBarGraph").click(function() {
+		$("#chart").empty();
+		$("#chart").append("<div class='bargraph'></div>");
 		generateBarGraph();
 	});
 	
@@ -68,6 +74,8 @@ $(document).ready(function() {
 	});
 	
 	$("#generatePieChart").click(function() {
+		$("#chart").empty();
+		$("#chart").append("<div class='bargraph'></div>");
 		generatePieChart();
 	});
 	

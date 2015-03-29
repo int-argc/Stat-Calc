@@ -71,7 +71,7 @@
     <div id="calculator">
 		<div id="Head"><h3>Enter Dataset Values:</h3></div>
 	<div id="codefield"><textarea rows=20% cols=90% id="dataset"></textarea></br></div>
-	<input type="button" id="Reset" onClick="clearTextArea();" value="Reset Input" /><br />
+	<input type="button" id="Reset" value="Reset Input" /><br />
 		<br/>
 		<div id="Choice">
 		<button type=button id="calcMean" class="Buttons">Get Mean</button>
@@ -101,9 +101,6 @@
     <script type="text/javascript">
 var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
 var MenuBar2 = new Spry.Widget.MenuBar("MenuBar2", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
-	function clearTextArea() {
-		document.getElementById('dataset').value = "";
-	}
     </script>
 	</body>
 </html>
