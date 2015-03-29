@@ -67,6 +67,10 @@ $(document).ready(function() {
 		
 	});
 	
+	$("#generatePieChart").click(function() {
+		generatePieChart();
+	});
+	
 	$("#generateRandData").click(function() {
 		var numData = Math.floor((Math.random() * 100) + 1);
 		var data = "";
@@ -136,5 +140,38 @@ function generateBarGraph() {
 	.text(function(d) {
 		return d;
 	});
+}
+
+function generatePieChart() {
+	var w = 600;
+	var h = 600;
+	var r = h/2;
+	var color = d3.scale.category20c();
+
+	var dataset = getInput();
+	var chartData = new Array(dataset.length);
+	for(var i = 0; i < dataset.length; i++)
+		chartData[i] = {"label":"" + dataset[i], "value":dataset[i]};
+
+	var vis = d3.select('#chart').append("svg:svg").data([chartData]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+	var pie = d3.layout.pie().value(function(d){return d.value;});
+
+	var arc = d3.svg.arc().outerRadius(r);
+
+	var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+	arcs.append("svg:path")
+		.attr("fill", function(d, i){
+			return color(i);
+		})
+		.attr("d", function (d) {
+			return arc(d);
+		});
+
+	arcs.append("svg:text").attr("transform", function(d){
+				d.innerRadius = 0;
+				d.outerRadius = r;
+		return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
+		return chartData[i].label;}
+			);
 }
 
