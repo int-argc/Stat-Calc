@@ -15,13 +15,13 @@
         <link rel=stylesheet href="main.css" type="text/css">
         <link href="SpryAssets/SpryMenuBarHorizontal.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" type="text/css" href="lined_ta/jquery-linedtextarea.css">
-		<script src="mainjs.js"></script>
+		<script src="mainjs.js" type="text/javascript"></script>
 		<script src="SpryAssets/SpryMenuBar.js" type="text/javascript"></script>
 	</head>
 	
 	<body>
-		<img id ="header"src="../../../Unnamed Site 2/header-analytics.jpg" width=100% height="100">
-	<ul id="MenuBar2" class="MenuBarHorizontal">
+		<!--<img id ="header"src="../../../Unnamed Site 2/header-analytics.jpg" width=100% height="100">-->
+	<!--<ul id="MenuBar2" class="MenuBarHorizontal">
           <li><a class="MenuBarItemSubmenu" href="#">Central Tendency</a>
             <ul>
               <li><a href="#">Mean</a></li>
@@ -66,27 +66,28 @@
 			  
             </ul>
 		  </li>
-    </ul>
+    </ul>-->
 	
     <div id="calculator">
-	<h3>Enter Dataset Values:</h3>
-	<textarea rows=20% cols=90% id="dataset"></textarea>
-	
-		<br />
-		<button type=button id="calcMean">Get Mean</button><br />
-		<button type=button id="calcMedian">Get Median</button> <br />
-		<button type=button id="calcMode">Get Mode</button> <br />
-		<button type=button id="calcStdDev">Get Std Deviation</button> <br />
-		<button type=button id="calcVariance">Get Variance</button> <br />
-		<button type=button id="calcRange">Get Range</button> <br />
-		<button type=button id="calcSkewness">Get Skewness</button> <br />
-		<button type=button id="calcCoeffvar">Get Coefficient Variation</button> <br />
-		<button type=button id="calcKurtosis">Get Kurtosis</button> <br />
-		<button type=button id="generateBarGraph">I Bar Grap Na itu</button> <br />
-		<button type=button id="generateFreqTable">Frequency Distribution Table</button> <br />
-		<button type=button id="generateRandData">Genrate Random Data Set</button> <br />
-		<button type=button id="generatePieChart">PI(3.14) chart</button> <br />
-		
+		<div id="Head"><h3>Enter Dataset Values:</h3></div>
+	<div id="codefield"><textarea rows=20% cols=90% id="dataset"></textarea></br></div>
+	<input type="button" id="Reset" onClick="clearTextArea();" value="Reset Input" /><br />
+		<br/>
+		<div id="Choice">
+		<button type=button id="calcMean" class="Buttons">Get Mean</button>
+		<button type=button id="calcMedian" class="Buttons">Get Median</button>
+		<button type=button id="calcMode" class="Buttons">Get Mode</button> 
+		<button type=button id="calcStdDev" class="Buttons">Get Std Deviation</button>
+		<button type=button id="calcVariance" class="Buttons">Get Variance</button> <br /><br />
+		<button type=button id="calcRange" class="Buttons">Get Range</button> 
+		<button type=button id="calcSkewness" class="Buttons">Get Skewness</button>
+		<button type=button id="calcCoeffvar" class="Buttons">Get Coefficient Variation</button> 
+		<button type=button id="calcKurtosis" class="Buttons">Get Kurtosis</button>
+		<button type=button id="generateBarGraph" class="Buttons">I Bar Grap Na itu</button> <br /><br />
+		<button type=button id="generateFreqTable" class="Buttons">Frequency Distribution Table</button> 
+		<button type=button id="generateRandData" class="Buttons">Genrate Random Data Set</button> 
+		<button type=button id="generatePieChart" class="Buttons">PI(3.14) chart</button> <br />
+		</div>
 		<h5 id="answer">Median: </h5>
 		
 		
@@ -100,6 +101,9 @@
     <script type="text/javascript">
 var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
 var MenuBar2 = new Spry.Widget.MenuBar("MenuBar2", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+	function clearTextArea() {
+		document.getElementById('dataset').value = "";
+	}
     </script>
 	</body>
 </html>
