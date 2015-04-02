@@ -60,8 +60,8 @@ h5{
 	font-size:17.5px;
 
 }
-/* chart css: don't modify -int-argc */
 
+/* chart css: don't modify below code -int-argc */
 
 .bargraph div {
 	font: 10px sans-serif;
@@ -71,5 +71,43 @@ h5{
 	padding: 8px;
 	margin: 2px;
 }
+
+.whisker line,
+.median line,
+.box rect, {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.outlier {
+  stroke: black;
+  stroke-width: 2px;
+}
+ 
+.point {  
+  opacity: 0.25; 
+}
+ 
+.axis path {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+ 
+.axis line {
+    fill: none;
+    stroke: black;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+ 
+.axis text {    
+    font-size: 10px;
+}
+
+/* do not modify above code -int-argc */
 
 @font-face { font-family: Chunk; src: url('Chunkfive.otf'); } 
