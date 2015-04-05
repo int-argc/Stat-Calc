@@ -10,6 +10,7 @@
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		
 		
+		
 		<script src="lined_ta/jquery-linedtextarea.js"></script>
 		
         <link rel=stylesheet href="main.css" type="text/css">
@@ -67,43 +68,98 @@
             </ul>
 		  </li>
     </ul>-->
-	
-    <div id="calculator">
-		<div id="Head"><h3>Enter Dataset Values:</h3></div>
-	<div id="codefield"><textarea rows=20% cols=90% id="dataset"></textarea></br></div>
-	<input type="button" id="Reset" value="Reset Input" /><br />
-		<br/>
-		<div id="Choice">
+	<div id="Choice">
 		<button type=button id="calcMean" class="Buttons">Get Mean</button>
 		<button type=button id="calcMedian" class="Buttons">Get Median</button>
 		<button type=button id="calcMode" class="Buttons">Get Mode</button> 
 		<button type=button id="calcStdDev" class="Buttons">Get Std Deviation</button>
-		<button type=button id="calcVariance" class="Buttons">Get Variance</button> <br /><br />
+		<button type=button id="calcVariance" class="Buttons">Get Variance</button> <br />
 		<button type=button id="calcRange" class="Buttons">Get Range</button> 
 		<button type=button id="calcSkewness" class="Buttons">Get Skewness</button>
 		<button type=button id="calcCoeffvar" class="Buttons">Get Coefficient Variation</button> 
 		<button type=button id="calcKurtosis" class="Buttons">Get Kurtosis</button>
-		<button type=button id="generateBarGraph" class="Buttons">I Bar Grap Na itu</button> <br /><br />
+		<button type=button id="generateBarGraph" class="Buttons">I Bar Grap Na itu</button> <br />
 		<button type=button id="generateFreqTable" class="Buttons">Frequency Distribution Table</button> 
 		<button type=button id="generateRandData" class="Buttons">Genrate Random Data Set</button> 
 		<button type=button id="generatePieChart" class="Buttons">PI(3.14) chart</button> <br />
-		<button id="generateBoxplot">Generate Box Plot</button> <br />
-		<button id="calcIQR">Get Inter-qartile rang</button> <br />
+		<button id="generateBoxplot" class="Buttons">Generate Box Plot</button> <br />
+		<button id="calcIQR" class="Buttons">Get Inter-quartile range</button> <br />
 		
 		</div>
-		<h5 id="answer">Median: </h5>
+    <div id="calculator">
+		<div id="Head"><h3>Enter Dataset Values:</h3></div>
+	<div id="codefield"><textarea rows=20% cols=90% id="dataset"></textarea></br></div>
+	<input type="button" id="Reset" value="Reset Input" /><br />
+		<h5>Answer:</h5>
+		<h5 id="answer"> </h5>
 		
 		
 		<div id="chart">
 			<div class="bargraph"></div>
 		</div>
-		
+		<div id="chart1">
+			<div class="bargraph1"></div>
+		</div>
 		<br /><br /><br />
 		
     </div>
     <script type="text/javascript">
-var MenuBar1 = new Spry.Widget.MenuBar("MenuBar1", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
-var MenuBar2 = new Spry.Widget.MenuBar("MenuBar2", {imgDown:"SpryAssets/SpryMenuBarDownHover.gif", imgRight:"SpryAssets/SpryMenuBarRightHover.gif"});
+	// Generate a Bates distribution of 10 random variables.
+var values = d3.range(10).map(d3.random.bates(2));
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var margin = {top: 10, right: 30, bottom: 30, left: 0},
+    width = 830 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+
+var x = d3.scale.linear()
+    .domain([12,14])
+    .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+var data = d3.layout.histogram()
+    .bins(x.ticks(5))
+    (values);
+
+var y = d3.scale.linear()
+    .domain([0, d3.max(data, function(d) { return d.y; })])
+    .range([height, 0]);
+
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var bar = svg.selectAll(".bar")
+    .data(data)
+  .enter().append("g")
+    .attr("class", "bar")
+    .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+bar.append("rect")
+    .attr("x", 1)
+    .attr("width", x(data[0].dx) - 1)
+    .attr("height", function(d) { return height - y(d.y); });
+
+bar.append("text")
+    .attr("dy", ".75em")
+    .attr("y", 6)
+    .attr("x", x(data[0].dx) / 2)
+    .attr("text-anchor", "middle")
+    .text(function(d) { return formatCount(d.y); });
+
+svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis);
     </script>
 	</body>
 </html>

@@ -11,56 +11,70 @@ $(document).ready(function() {
 	
 	// statistical calculations
 	$("#calcMean").click(function() {
+		$("#chart").empty();
 		output(jStat.mean(getInput()));
 	});
 	
 	$("#calcMedian").click(function() {
+		$("#chart").empty();
 		output(jStat.median(getInput()));
 	});
 	
 	$("#calcMode").click(function() {
+		$("#chart").empty();
 		output(jStat.mode(getInput()));
 	});
 	
 	$("#calcStdDev").click(function() {
+		$("#chart").empty();
 		output(jStat.stdev(getInput()));
 	});
 	
 	$("#calcVariance").click(function() {
+		$("#chart").empty();
 		output(jStat.variance(getInput()));
 	});
 	
 	$("#calcRange").click(function() {
+		$("#chart").empty();
 		output(jStat.range(getInput()));
 	});
 	
 	$("#calcSkewness").click(function() {
+		$("#chart").empty();
 		output(jStat.skewness(getInput()));
 	});
 	
 	$("#calcCoeffvar").click(function() {
+		$("#chart").empty();
 		output(jStat.coeffvar(getInput()));
 	});
 	
 	$("#calcKurtosis").click(function() {
+		$("#chart").empty();
 		output(jStat.kurtosis(getInput()));
 	});
 	
 	$("#quartiles").click(function() {
+		$("#chart").empty();
 		output(jStat.quartiles(getInput()));
 	});
 	
 	$("#calcIQR").click(function() {
+		$("#chart").empty();
 		output(iqr(getInput()));	// alt iqr2, compare with kurt's
 	});
 	
 	$("#generateBarGraph").click(function() {
 		$("#chart").empty();
+		$("#answer").empty();
 		$("#chart").append("<div class='bargraph'></div>");
 		generateBarGraph();
 	});
 	
 	$("#generateFreqTable").click(function() {
+		$("#chart").empty();
+		$("#answer").empty();
 		var arr = getInput();
 		var freq = Array.apply(null, new Array(arr.length)).map(Number.prototype.valueOf, 0);
 		
@@ -79,6 +93,7 @@ $(document).ready(function() {
 	
 	$("#generatePieChart").click(function() {
 		$("#chart").empty();
+		$("#answer").empty();
 		$("#chart").append("<div class='bargraph'></div>");
 		generatePieChart();
 	});
@@ -90,10 +105,13 @@ $(document).ready(function() {
 			data += Math.floor((Math.random() * 1000) + 1) + "\n";
 		data += Math.floor((Math.random() * 1000) + 1);
 		
-		$("#dataset").text(data);
+		// $("#dataset").text(data);
+		document.getElementById("dataset").value = data;
 	});
 	
 	$("#generateBoxplot").click(function() {
+		$("#chart").empty();
+		$("#answer").empty();
 		generateBoxplot();
 	});
 	
@@ -318,4 +336,5 @@ function generateBoxplot() {
 	 .attr("y1", midline - 10)
 	 .attr("y2", midline + 10); 
 }
+
 

@@ -21,9 +21,9 @@ html,body{
 
 #calculator{
 	position:absolute;
-	top:0;
-	bottom:0;
-	margin-left: 20%;
+	//top:0;
+	//bottom:0;
+	margin-left: 300px;
 	width:1000px;
 	min-height:1000px;
     font-size: 30px;
@@ -51,17 +51,40 @@ h5{
 	margin-left:20px;
 }
 
+#chart{
+	margin-left:100px;
+}
+
+#chart1{
+	margin-left:5px;
+}
+
 #Choice{
-	margin-left:20px;
+	margin-left:10px;
+	display:block;
+	position:absolute;
+	width:170px;
 }
 
 .Buttons{
 	font-family:'Chunk';
 	font-size:17.5px;
-
+	width:200px;
+	margin-top:10px;
+	margin-left:19px;
 }
 
 /* chart css: don't modify below code -int-argc */
+
+.bargraph1 div {
+	font: 10px sans-serif;
+	background-color: green;
+	color: white;
+	text-align: right;
+	padding: 8px;
+	margin: 0px;
+	margin-left:0px;
+}
 
 .bargraph div {
 	font: 10px sans-serif;
@@ -70,6 +93,14 @@ h5{
 	text-align: right;
 	padding: 8px;
 	margin: 2px;
+	margin-left:18px;
+}
+
+table,tr,td{
+	border-collapse: collapse;
+	border:1px solid black;
+	padding:2px;
+	text-align:center;
 }
 
 .whisker line,
@@ -105,9 +136,16 @@ h5{
 }
  
 .axis text {    
-    font-size: 10px;
+    font-size: 15px;
+}
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
 }
 
+.bar text {
+  fill: #fff;
+}
 /* do not modify above code -int-argc */
 
 @font-face { font-family: Chunk; src: url('Chunkfive.otf'); } 
