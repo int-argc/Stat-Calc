@@ -77,6 +77,13 @@ $(document).ready(function() {
 			dispError(x + " does not exist in the dataset, cannot get percentile rank!");
 		
 		output(((ltX + 0.5 * eqX) / arr.length * 100) + " %");
+	});
+	
+	$("#calcDecile").click(function() {
+		var decout;
+		for(var i = 1; i <= 10; i++)
+			decout += "D " + i + " : " + getPercentile(i * 10) + "<br />";
+		output(decout);
 		
 	});
 	
