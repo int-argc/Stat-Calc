@@ -30,12 +30,6 @@ html,body{
 	background-color: #FFF;
 	}
 
-#Reset{
-	margin-left:20px;
-	font-family:'Chunk';
-	font-size:17.5px;
-}	
-
 #codefield{
 	margin-left:10%;
 }
@@ -46,13 +40,17 @@ html,body{
 	margin-left:20px;
 }
 
-h5{
+#Reset{
+	margin-top:20px;
+}
+
+h1{
 	font-family:'Garamond';
 	margin-left:20px;
 }
 
 #chart{
-	margin-left:100px;
+	margin-left:20px;
 }
 
 #chart1{
@@ -60,18 +58,17 @@ h5{
 }
 
 #Choice{
-	margin-left:10px;
-	display:block;
+	margin-left:40px;
 	position:absolute;
 	width:170px;
 }
 
-.Buttons{
-	font-family:'Chunk';
-	font-size:17.5px;
-	width:200px;
-	margin-top:10px;
-	margin-left:19px;
+#err {
+	color: red;
+}
+
+.dropdown{
+	margin-top:50px;
 }
 
 /* chart css: don't modify below code -int-argc */

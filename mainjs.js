@@ -6,7 +6,7 @@ $(document).ready(function() {
 	$("#dataset").linedtextarea();
 	
 	$("#Reset").click(function() {
-		$("#dataset").text("");
+		document.getElementById("dataset").value = "";
 	});
 	
 	// statistical calculations
@@ -58,6 +58,26 @@ $(document).ready(function() {
 	$("#quartiles").click(function() {
 		$("#chart").empty();
 		output(jStat.quartiles(getInput()));
+	});
+	
+	$("#calcPercRank").click(function() {
+		var x = parseInt(document.getElementById("refData").value);
+		var arr = getInput();
+		
+		var ltX = 0;
+		var eqX = 0;
+		for(var i = 0; i < arr.length; i++) {
+			if(arr[i] == x)
+				eqX++;
+			else if(arr[i] < x)
+				ltX++;
+		}
+		
+		if(eqX == 0)
+			dispError(x + " does not exist in the dataset, cannot get percentile rank!");
+		
+		output(((ltX + 0.5 * eqX) / arr.length * 100) + " %");
+		
 	});
 	
 	$("#calcIQR").click(function() {
@@ -115,10 +135,30 @@ $(document).ready(function() {
 		generateBoxplot();
 	});
 	
+	$("#generateLineGraph").click(function() {
+		$("#chart").empty();
+		$("#answer").empty();
+		generateLineGraph();
+	});
+	
+	$("#generateScatterPlot").click(function() {
+		$("#chart").empty();
+		$("#answer").empty();
+		generateScatterPlot();
+	});
+	
 });	// end of document.ready
 
 function output(out) {
 	document.getElementById("answer").innerHTML = out;
+}
+
+function dispError(errMess) {
+	setTimeout(function() {
+		document.getElementById("err").innerHTML = ""
+	}, 2000);
+	
+	document.getElementById("err").innerHTML = errMess;
 }
 
 // implement error checking here, pls add comments about "what kind of error check"
@@ -127,17 +167,12 @@ function getInput() {
 		var arr = new Array();
 		var strArr = document.getElementById("dataset").value.split('\n');	// replace with whitespace regex
 		for(var i = 0; i < strArr.length; i++) {
-			if(strArr[i] == '') errorOccured();
+			if(strArr[i] == '') dispError("ERROR IN DATA SET");
 			arr[i] = parseInt(strArr[i]);
 		}
 		return arr;
 	}
-	errorOccured();
-}
-
-function errorOccured() {
-	alert("ERROR IN DATA SET");
-	// exit status
+	dispError("ERROR IN DATA SET");
 }
 
 function validDataSet() {
@@ -188,6 +223,112 @@ function generateBarGraph() {
 	.text(function(d) {
 		return d;
 	});
+}
+
+function generateLineGraph(){
+	var arr=getInput();
+	var arr_len=arr.length;
+	var values=[];
+	var cattext=[];
+	for (var i=0;i<arr_len;i++)      
+    values[i]=arr[i];
+	for (var i=0;i<arr_len;i++)      
+    cattext[i]="Data #"+(i+1);
+	$('#chart').highcharts({
+        title: {
+            text: 'Line Chart'
+        },
+        xAxis: {
+            categories: cattext
+        },
+        series: [{
+            data: values,
+            step: 'right',
+            name: 'Values of the collected data'
+        },]
+
+    });
+
+}
+
+function generateScatterPlot(){
+	var arr=getInput();
+	var arr_len=arr.length;
+	var values=[];
+	var cattext=[];
+	var k=0;
+	for (var i=0;i<arr_len;i++){
+		k=i;
+		if( (k+1) % 2===0)
+		values[k-1]=values.push(arr[k]);
+		else
+		values[i]=arr[i];}
+	for (var i=0;i<arr_len;i++)      
+    cattext[i]="Data #"+(i+1);
+    $('#chart').highcharts({
+        chart: {
+            type: 'scatter',
+            
+        },
+        title: {
+            text: 'Scatter Plot'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Values of the collected Data' + values
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Numbers'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                }
+            }
+        },
+        series: [{
+            name: 'Value',
+            color: 'rgba(223, 83, 83, .5)',
+            data: values
+
+        }]
+    });
+
+
 }
 
 function generatePieChart() {
